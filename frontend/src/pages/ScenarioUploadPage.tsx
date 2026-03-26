@@ -225,7 +225,7 @@ export function ScenarioUploadPage({ onCreated }: Props) {
               : "Sem anexos. Com anexo, o sistema adiciona avaliacao visual ao teste."}
           </Typography>
 
-          <Stack direction="row" spacing={2}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <Button onClick={handleSubmit} variant="contained" disabled={isSubmitting}>
               {isSubmitting ? "Enviando..." : "Rodar teste"}
             </Button>

@@ -6,6 +6,7 @@ import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import MenuIcon from "@mui/icons-material/Menu";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -20,6 +22,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { fetchHealth } from "./api/client";
@@ -129,22 +132,7 @@ const NAV_ITEMS: NavItem[] = [
 
 function Sidebar({ tab, onTab, health }: { tab: number; onTab: (t: number) => void; health: Health | null }) {
   return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: SIDEBAR_WIDTH,
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
-          width: SIDEBAR_WIDTH,
-          boxSizing: "border-box",
-          background: SOMPO_NAVY,
-          color: "#fff",
-          borderRight: "none",
-          display: "flex",
-          flexDirection: "column",
-        },
-      }}
-    >
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100%", background: SOMPO_NAVY, color: "#fff" }}>
       <Toolbar sx={{ px: 2.5, minHeight: "72px !important" }}>
         <Stack direction="row" spacing={1.5} alignItems="center">
           <Box
@@ -244,7 +232,7 @@ function Sidebar({ tab, onTab, health }: { tab: number; onTab: (t: number) => vo
           )}
         </Stack>
       </Box>
-    </Drawer>
+    </Box>
   );
 }
 
@@ -279,35 +267,64 @@ const PAGE_INTENT: Record<number, { image: string; message: string }> = {
   },
 };
 
-function PageHeader({ tab, health }: { tab: number; health: Health | null }) {
+function PageHeader({
+  tab,
+  health,
+  isMobile,
+  onOpenMenu,
+}: {
+  tab: number;
+  health: Health | null;
+  isMobile: boolean;
+  onOpenMenu: () => void;
+}) {
   const info = PAGE_TITLES[tab] ?? PAGE_TITLES[0];
   return (
     <Box
       sx={{
-        height: 72,
+        minHeight: 72,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        px: 4,
+        px: { xs: 2, md: 4 },
+        py: { xs: 1, md: 0 },
         background: "#fff",
         borderBottom: "1px solid #e5eaf2",
         flexShrink: 0,
+        gap: 1.5,
       }}
     >
-      <Stack spacing={0.25}>
-        <Typography variant="h6" sx={{ lineHeight: 1.2 }}>
-          {info.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {info.subtitle}
-        </Typography>
+      <Stack direction="row" spacing={1} alignItems="flex-start">
+        {isMobile ? (
+          <IconButton
+            onClick={onOpenMenu}
+            size="small"
+            aria-label="Abrir menu"
+            sx={{ mt: 0.25, border: "1px solid #e5eaf2", borderRadius: 2 }}
+          >
+            <MenuIcon fontSize="small" />
+          </IconButton>
+        ) : null}
+        <Stack spacing={0.25}>
+          <Typography variant="h6" sx={{ lineHeight: 1.2, fontSize: { xs: "1rem", md: "1.25rem" } }}>
+            {info.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ display: { xs: "none", md: "block" } }}>
+            {info.subtitle}
+          </Typography>
+        </Stack>
       </Stack>
       {health && (
         <Chip
           size="small"
           label={`${formatRuntime(health.openclaw_runtime)} | ${formatRuntime(health.openclaw_mode)}`}
           variant="outlined"
-          sx={{ fontSize: "0.7rem", color: "text.secondary", borderColor: "#e5eaf2" }}
+          sx={{
+            fontSize: "0.7rem",
+            color: "text.secondary",
+            borderColor: "#e5eaf2",
+            maxWidth: { xs: 150, md: "none" },
+          }}
         />
       )}
     </Box>
@@ -318,30 +335,74 @@ export default function App() {
   const [tab, setTab] = useState(0);
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null);
   const [health, setHealth] = useState<Health | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const intentInfo = PAGE_INTENT[tab] ?? PAGE_INTENT[0];
+  const isMobile = useMediaQuery("(max-width:900px)");
 
   useEffect(() => {
     void fetchHealth().then(setHealth);
   }, []);
 
+  const handleTabChange = (nextTab: number) => {
+    setTab(nextTab);
+    if (isMobile) {
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-        <Sidebar tab={tab} onTab={setTab} health={health} />
+      <Box sx={{ display: "flex", minHeight: "100dvh", overflow: "hidden" }}>
+        {isMobile ? (
+          <Drawer
+            open={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            variant="temporary"
+            ModalProps={{ keepMounted: true }}
+            sx={{
+              "& .MuiDrawer-paper": {
+                width: SIDEBAR_WIDTH,
+                boxSizing: "border-box",
+                background: SOMPO_NAVY,
+                color: "#fff",
+                borderRight: "none",
+              },
+            }}
+          >
+            <Sidebar tab={tab} onTab={handleTabChange} health={health} />
+          </Drawer>
+        ) : (
+          <Drawer
+            variant="permanent"
+            sx={{
+              width: SIDEBAR_WIDTH,
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: SIDEBAR_WIDTH,
+                boxSizing: "border-box",
+                background: SOMPO_NAVY,
+                color: "#fff",
+                borderRight: "none",
+              },
+            }}
+          >
+            <Sidebar tab={tab} onTab={handleTabChange} health={health} />
+          </Drawer>
+        )}
 
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-          <PageHeader tab={tab} health={health} />
+          <PageHeader tab={tab} health={health} isMobile={isMobile} onOpenMenu={() => setMobileMenuOpen(true)} />
 
           <Box sx={{ flex: 1, overflow: "auto", background: "#f0f4f9" }}>
-            <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 }, px: { xs: 1.5, md: 3 } }}>
               <Box
                 sx={{
                   borderRadius: 2.5,
                   border: "1px solid #e5eaf2",
                   background: "#fff",
-                  p: 1.25,
-                  mb: 3,
+                  p: { xs: 1, md: 1.25 },
+                  mb: { xs: 2, md: 3 },
                   display: "grid",
                   gridTemplateColumns: { xs: "1fr", md: "280px 1fr" },
                   gap: 2,
@@ -367,9 +428,9 @@ export default function App() {
                   borderRadius: 2.5,
                   border: "1px solid #dbeafe",
                   background: "linear-gradient(135deg, #f0f7ff 0%, #f8fbff 100%)",
-                  px: 2,
-                  py: 1.5,
-                  mb: 3,
+                  px: { xs: 1.5, md: 2 },
+                  py: { xs: 1.25, md: 1.5 },
+                  mb: { xs: 2, md: 3 },
                 }}
               >
                 <Typography sx={{ fontWeight: 700, color: "#163f67", mb: 0.5 }}>Contexto de negocio</Typography>

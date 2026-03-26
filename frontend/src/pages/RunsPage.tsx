@@ -11,6 +11,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TableContainer from "@mui/material/TableContainer";
 import Typography from "@mui/material/Typography";
 
 import { fetchRuns } from "../api/client";
@@ -83,7 +84,8 @@ export function RunsPage({ selectedRunId, onSelectRun }: Props) {
       </Grid>
 
       <SectionCard title="Lista de casos" subtitle="Cada linha mostra o teste, o risco que ele busca prevenir e a faixa de perda financeira evitavel.">
-        <Table size="small">
+        <TableContainer sx={{ width: "100%", overflowX: "auto" }}>
+        <Table size="small" sx={{ minWidth: 1200 }}>
           <TableHead>
             <TableRow>
               <TableCell>Caso</TableCell>
@@ -183,6 +185,7 @@ export function RunsPage({ selectedRunId, onSelectRun }: Props) {
             })}
           </TableBody>
         </Table>
+        </TableContainer>
       </SectionCard>
     </Stack>
   );

@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
@@ -265,7 +266,8 @@ function RiskBreakdownTable({ items, type }: { items: BreakdownRisk[]; type: "re
   }
 
   return (
-    <Table size="small">
+    <TableContainer sx={{ width: "100%", overflowX: "auto" }}>
+    <Table size="small" sx={{ minWidth: 520 }}>
       <TableHead>
         <TableRow>
           <TableCell>{type === "region" ? "Regiao" : "Tipo de operacao"}</TableCell>
@@ -285,6 +287,7 @@ function RiskBreakdownTable({ items, type }: { items: BreakdownRisk[]; type: "re
         ))}
       </TableBody>
     </Table>
+    </TableContainer>
   );
 }
 
@@ -294,7 +297,8 @@ function DriverHotspotsTable({ items }: { items: DriverHotspot[] }) {
   }
 
   return (
-    <Table size="small">
+    <TableContainer sx={{ width: "100%", overflowX: "auto" }}>
+    <Table size="small" sx={{ minWidth: 520 }}>
       <TableHead>
         <TableRow>
           <TableCell>Sinal</TableCell>
@@ -314,6 +318,7 @@ function DriverHotspotsTable({ items }: { items: DriverHotspot[] }) {
         ))}
       </TableBody>
     </Table>
+    </TableContainer>
   );
 }
 
@@ -345,7 +350,8 @@ function RecentHighRiskRunsTable({ items, onOpenRun }: { items: RecentRiskRun[];
   }
 
   return (
-    <Table size="small">
+    <TableContainer sx={{ width: "100%", overflowX: "auto" }}>
+    <Table size="small" sx={{ minWidth: 760 }}>
       <TableHead>
         <TableRow>
           <TableCell>Caso</TableCell>
@@ -383,5 +389,6 @@ function RecentHighRiskRunsTable({ items, onOpenRun }: { items: RecentRiskRun[];
         ))}
       </TableBody>
     </Table>
+    </TableContainer>
   );
 }
