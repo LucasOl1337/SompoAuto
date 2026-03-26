@@ -1,0 +1,13 @@
+{
+  "name": "sompo-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "powershell -ExecutionPolicy Bypass -File .\\scripts\\dev-start.ps1",
+    "dev:stop": "powershell -ExecutionPolicy Bypass -File .\\scripts\\dev-stop.ps1",
+    "dev:backend": "call run-backend-local.cmd",
+    "dev:frontend": "call run-frontend-local.cmd",
+    "build": "cd frontend && npm run build",
+    "lint": "cd frontend && npm run lint"
+  }
+}

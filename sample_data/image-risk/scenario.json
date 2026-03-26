@@ -1,0 +1,19 @@
+{
+  "scenario_id": "sample-image-risk",
+  "equipment_id": "sprayer-22",
+  "region": "ms-west",
+  "operation_type": "field_operation",
+  "telemetry_payload": {
+    "temperature": 88,
+    "vibration": 62,
+    "speed": 31,
+    "obstacle_density": 66,
+    "proximity_water": 59,
+    "load_factor": 71
+  },
+  "scenario_metadata": {
+    "preset": "image",
+    "notes": "Attachment should trigger vision stub"
+  },
+  "timestamp": "2026-03-24T09:00:00Z"
+}

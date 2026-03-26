@@ -1,0 +1,19 @@
+{
+  "scenario_id": "sample-high-risk",
+  "equipment_id": "harvester-91",
+  "region": "go-south",
+  "operation_type": "transport",
+  "telemetry_payload": {
+    "temperature": 94,
+    "vibration": 78,
+    "speed": 53,
+    "obstacle_density": 74,
+    "proximity_water": 64,
+    "load_factor": 88
+  },
+  "scenario_metadata": {
+    "preset": "high",
+    "notes": "Critical transport window"
+  },
+  "timestamp": "2026-03-24T09:00:00Z"
+}

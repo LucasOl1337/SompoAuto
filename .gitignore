@@ -1,0 +1,28 @@
+.env
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# root/runtime logs
+*.log
+*.err.log
+
+# local temp artifacts
+_tmp_*.pdf
+
+# backend
+backend/.venv/
+backend/.test-artifacts/
+backend/.data/
+backend/test.db
+backend/dev.db
+backend/.pytest_cache/
+backend/.git_backup/
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+
+# misc
+.DS_Store
+Thumbs.db

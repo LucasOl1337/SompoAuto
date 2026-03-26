@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#dbe8f4" />
+  <rect x="20" y="105" width="180" height="35" rx="8" fill="#779e4d" />
+  <circle cx="55" cy="150" r="16" fill="#2d3748" />
+  <circle cx="165" cy="150" r="16" fill="#2d3748" />
+  <rect x="75" y="80" width="80" height="30" rx="4" fill="#4a6984" />
+  <rect x="210" y="70" width="75" height="55" rx="6" fill="#7fb3d5" />
+  <text x="16" y="24" fill="#1f2937" font-size="16" font-family="Arial, sans-serif">mock inspection frame</text>
+  <text x="210" y="140" fill="#c0392b" font-size="14" font-family="Arial, sans-serif">possible obstacle</text>
+</svg>

@@ -1,0 +1,34 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "SOMPO agentic prototype backend"
+readme = "README.md"
+authors = [
+    { name = "LucasOl1337", email = "lucasol1337@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.135.2",
+    "minio>=7.2.20",
+    "psycopg[binary]>=3.3.3",
+    "pydantic-settings>=2.13.1",
+    "python-multipart>=0.0.22",
+    "sqlalchemy>=2.0.48",
+    "uvicorn[standard]>=0.42.0",
+]
+
+[project.scripts]
+backend = "backend.main:main"
+
+[build-system]
+requires = ["uv_build>=0.10.9,<0.11.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

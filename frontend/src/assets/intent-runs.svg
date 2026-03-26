@@ -1,0 +1,17 @@
+<svg width="640" height="180" viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eaf4ff"/>
+      <stop offset="100%" stop-color="#f6fbff"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="180" rx="16" fill="url(#bg)"/>
+  <rect x="30" y="35" width="245" height="110" rx="10" fill="#ffffff" stroke="#cfe3ff"/>
+  <rect x="50" y="58" width="205" height="10" rx="5" fill="#dbeafe"/>
+  <rect x="50" y="82" width="165" height="10" rx="5" fill="#e5efff"/>
+  <rect x="50" y="106" width="185" height="10" rx="5" fill="#e5efff"/>
+  <circle cx="405" cy="88" r="42" fill="#0f4c81" opacity="0.14"/>
+  <circle cx="465" cy="88" r="32" fill="#0f4c81" opacity="0.24"/>
+  <path d="M377 104 L405 76 L433 104" stroke="#0f4c81" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="30" y="24" font-family="Inter, Arial, sans-serif" font-size="12" fill="#33608f">Mapa de casos analisados</text>
+</svg>

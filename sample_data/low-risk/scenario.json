@@ -1,0 +1,19 @@
+{
+  "scenario_id": "sample-low-risk",
+  "equipment_id": "tractor-14",
+  "region": "mt-north",
+  "operation_type": "field_operation",
+  "telemetry_payload": {
+    "temperature": 52,
+    "vibration": 35,
+    "speed": 24,
+    "obstacle_density": 20,
+    "proximity_water": 18,
+    "load_factor": 45
+  },
+  "scenario_metadata": {
+    "preset": "low",
+    "notes": "Normal operating window"
+  },
+  "timestamp": "2026-03-24T09:00:00Z"
+}
