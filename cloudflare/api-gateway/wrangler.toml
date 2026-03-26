@@ -1,0 +1,10 @@
+name = "sompoauto-api-gateway"
+main = "src/index.ts"
+compatibility_date = "2026-03-26"
+
+[observability]
+enabled = true
+
+[vars]
+# Example: https://sompoauto-api.onrender.com
+BACKEND_ORIGIN = "http://localhost:8000"

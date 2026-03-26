@@ -1,0 +1,15 @@
+{
+  "name": "sompoauto-api-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "*",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.9.1"
+  }
+}

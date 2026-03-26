@@ -75,3 +75,15 @@ Passos:
 2. Conecte o repo `LucasOl1337/SompoAuto`.
 3. Confirme o deploy usando o `render.yaml`.
 4. Apos subir, acesse `sompoauto-web` (site) e ele consumira a URL publica do `sompoauto-api`.
+
+## Deploy na Cloudflare (sem quebrar backend atual)
+
+Para evitar refatoracao arriscada imediata:
+
+- Frontend em Cloudflare Pages
+- API gateway em Cloudflare Workers
+- Backend Python atual segue intacto
+
+Guia completo em:
+
+- `cloudflare/README.md`

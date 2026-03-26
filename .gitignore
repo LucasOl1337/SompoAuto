@@ -22,6 +22,7 @@ backend/.git_backup/
 # frontend
 frontend/node_modules/
 frontend/dist/
+cloudflare/api-gateway/node_modules/
 
 # misc
 .DS_Store
