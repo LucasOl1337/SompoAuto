@@ -1,7 +1,9 @@
 from functools import lru_cache
+import json
 from pathlib import Path
 
 from pydantic import Field
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -42,6 +44,28 @@ class Settings(BaseSettings):
         case_sensitive=False,
         extra="ignore",
     )
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value: str) -> str:
+        raw = str(value)
+        if raw.startswith("postgres://"):
+            return raw.replace("postgres://", "postgresql+psycopg://", 1)
+        if raw.startswith("postgresql://") and "+psycopg" not in raw:
+            return raw.replace("postgresql://", "postgresql+psycopg://", 1)
+        return raw
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def normalize_cors_origins(cls, value: object) -> object:
+        if isinstance(value, str):
+            raw = value.strip()
+            if raw == "*":
+                return ["*"]
+            if raw.startswith("["):
+                return json.loads(raw)
+            return [origin.strip() for origin in raw.split(",") if origin.strip()]
+        return value
 
 
 @lru_cache

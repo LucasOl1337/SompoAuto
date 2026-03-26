@@ -60,3 +60,18 @@ docker compose up --build
 4. Inicie o run
 5. Acompanhe a timeline em `Run Detail`
 6. Gere o consolidado em `Hourly Reports`
+
+## Deploy na Render
+
+Este repo ja inclui `render.yaml` com:
+
+- `sompoauto-api` (FastAPI + Postgres + storage local persistente)
+- `sompoauto-web` (frontend React estatico)
+- `sompoauto-db` (PostgreSQL gerenciado)
+
+Passos:
+
+1. No Render, clique em **New +** > **Blueprint**.
+2. Conecte o repo `LucasOl1337/SompoAuto`.
+3. Confirme o deploy usando o `render.yaml`.
+4. Apos subir, acesse `sompoauto-web` (site) e ele consumira a URL publica do `sompoauto-api`.
