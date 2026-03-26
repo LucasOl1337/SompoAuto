@@ -38,7 +38,7 @@ services:
         fromService:
           type: web
           name: sompoauto-api
-          property: url
+          property: host
     routes:
       - type: rewrite
         source: /*

@@ -1,6 +1,17 @@
 import type { Health, HourlyReportResponse, PortfolioSummary, RunDetail, RunListItem } from "../types/api";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+function normalizeApiBaseUrl(value: string | undefined): string {
+  if (!value || value.trim() === "") {
+    return "http://localhost:8000";
+  }
+  const normalized = value.trim();
+  if (normalized.startsWith("http://") || normalized.startsWith("https://")) {
+    return normalized;
+  }
+  return `https://${normalized}`;
+}
+
+const API_BASE_URL = normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL);
 
 type ScenarioPayload = {
   scenario_id: string;
